@@ -33,7 +33,7 @@ namespace OrderService.Commands
             {
                 foreach (var item in result)
                 {
-                    var customer = await _customerService.GetCustomer(new CustomerParams { CustomerId = item.UserId});
+                    var customer = await _customerService.GetCustomer(item.UserId);
                     var order = new OrderDto
                     {
                         CreatedDate = item.CreatedDate,
@@ -50,7 +50,7 @@ namespace OrderService.Commands
 
                     foreach (var orderDetail in item.OrderDetails)
                     {
-                        var product = await _productService.GetProduct(new ProductParams { ProductId = orderDetail.ProductId });
+                        var product = await _productService.GetProduct(orderDetail.ProductId);
                         
                         var orderDto = new OrderDetailDto
                         {

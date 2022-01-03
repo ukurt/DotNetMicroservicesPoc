@@ -14,14 +14,9 @@ namespace OrderService.RestClients
             this._customerClient = customerClient;
         }
 
-        public async Task<CustomerDto> GetCustomer(CustomerParams cmd)
+        public async Task<CustomerDto> GetCustomer(int customerId)
         {
-            var query = new FindCustomerQuery
-            {
-                CustomerId = cmd.CustomerId
-            };
-
-            return await _customerClient.GetByCode(query);
+            return await _customerClient.GetByCode(customerId);
         }
     }
 }

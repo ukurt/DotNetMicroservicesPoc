@@ -14,7 +14,8 @@ namespace OrderService.RestClients
 {
     public interface ICustomerClient
     {
-        Task<CustomerDto> GetByCode([Query] FindCustomerQuery cmd);
+        [Get("api/customer")]
+        Task<CustomerDto> GetByCode(int customerId);
     }
 
     public class CustomerClient : ICustomerClient
@@ -27,17 +28,13 @@ namespace OrderService.RestClients
 
         public CustomerClient(IConfiguration configuration)
         {
-            var httpClient = new HttpClient()
-            {
-                BaseAddress = new Uri(configuration.GetValue<string>("CustomerServiceUri"))
-            };
-            client = RestClient.For<ICustomerClient>(httpClient);
+            client = RestClient.For<ICustomerClient>(configuration.GetValue<string>("CustomerServiceUri"));
         }
 
 
-        public async Task<CustomerDto> GetByCode([Query] FindCustomerQuery cmd)
+        public async Task<CustomerDto> GetByCode(int customerId)
         {
-            return await retryPolicy.ExecuteAsync(async () => await client.GetByCode(cmd));
+            return await retryPolicy.ExecuteAsync(async () => await client.GetByCode(customerId));
         }
     }
 }

@@ -14,14 +14,9 @@ namespace OrderService.RestClients
             this._productClient = productClient;
         }
 
-        public async Task<ProductDto> GetProduct(ProductParams cmd)
+        public async Task<ProductDto> GetProduct(int productId)
         {
-            var query = new FindProductByIdQuery
-            {
-                ProductId = cmd.ProductId
-            };
-
-            return await _productClient.FindProductById(query);
+            return await _productClient.FindProductById(productId);
         }
        
     }

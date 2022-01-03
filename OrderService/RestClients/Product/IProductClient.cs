@@ -14,7 +14,8 @@ namespace OrderService.RestClients
 {
     public interface IProductClient
     {
-        Task<ProductDto> FindProductById([Query] FindProductByIdQuery cmd);
+        [Get("api/products")]
+        Task<ProductDto> FindProductById(int productId);
     }
 
     public class ProductClient : IProductClient
@@ -27,17 +28,13 @@ namespace OrderService.RestClients
 
         public ProductClient(IConfiguration configuration)
         {
-            var httpClient = new HttpClient()
-            {
-                BaseAddress = new Uri(configuration.GetValue<string>("ProductServiceUri"))
-            };
-            client = RestClient.For<IProductClient>(httpClient);
+            client = RestClient.For<IProductClient>(configuration.GetValue<string>("ProductServiceUri"));
         }
 
 
-        public Task<ProductDto> FindProductById([Query] FindProductByIdQuery cmd)
+        public Task<ProductDto> FindProductById(int productId)
         {
-            return retryPolicy.ExecuteAsync(async () => await client.FindProductById(cmd));
+            return retryPolicy.ExecuteAsync(async () => await client.FindProductById(productId));
         }
     }
 }
