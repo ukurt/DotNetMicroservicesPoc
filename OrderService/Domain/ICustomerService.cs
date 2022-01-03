@@ -1,11 +1,12 @@
 ﻿using CustomerService.Api.Queries;
+using CustomerService.Api.Queries.Dtos;
 using System.Threading.Tasks;
 
 namespace OrderService.Domain
 {
     public interface ICustomerService
     {
-        Task<FindCustomerResult> GetCustomer(CustomerParams cmd);
+        Task<CustomerDto> GetCustomer(CustomerParams cmd);
     }
 
     public class CustomerParams

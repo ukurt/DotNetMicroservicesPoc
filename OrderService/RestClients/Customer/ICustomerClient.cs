@@ -2,16 +2,19 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using CustomerService.Api.Queries;
+using CustomerService.Api.Queries.Dtos;
 using Microsoft.Extensions.Configuration;
 using Polly;
 using Polly.Retry;
 using RestEase;
+using Steeltoe.Common.Discovery;
+using Steeltoe.Discovery;
 
 namespace OrderService.RestClients
 {
     public interface ICustomerClient
     {
-        Task<FindCustomerResult> GetCustomer([Body] FindCustomerQuery cmd);
+        Task<CustomerDto> GetByCode([Query] FindCustomerQuery cmd);
     }
 
     public class CustomerClient : ICustomerClient
@@ -31,9 +34,10 @@ namespace OrderService.RestClients
             client = RestClient.For<ICustomerClient>(httpClient);
         }
 
-        public async Task<FindCustomerResult> GetCustomer([Body] FindCustomerQuery cmd)
+
+        public async Task<CustomerDto> GetByCode([Query] FindCustomerQuery cmd)
         {
-            return await retryPolicy.ExecuteAsync(async () => await client.GetCustomer(cmd));
+            return await retryPolicy.ExecuteAsync(async () => await client.GetByCode(cmd));
         }
     }
 }

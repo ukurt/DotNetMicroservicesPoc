@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CustomerService.Api.Queries
 {
-    public class FindCustomerQuery : IRequest<FindCustomerResult>
+    public class FindCustomerQuery : IRequest<Dtos.CustomerDto>
     {
         public int CustomerId { get; set; }
     }

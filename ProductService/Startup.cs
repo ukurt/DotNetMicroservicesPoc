@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ProductService.DataAccess.EF;
 using ProductService.Init;
+using Steeltoe.Discovery.Client;
 using System.Linq;
 
 namespace ProductService
@@ -24,6 +25,7 @@ namespace ProductService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDiscoveryClient(Configuration);
             services.AddEFConfiguration(Configuration);
             services.AddMvc()
                 .AddNewtonsoftJson(JsonOptions)

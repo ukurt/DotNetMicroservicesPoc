@@ -21,7 +21,7 @@ namespace OrderService.RestClients
                 ProductId = cmd.ProductId
             };
 
-            return await _productClient.GetProduct(query);
+            return await _productClient.FindProductById(query);
         }
        
     }

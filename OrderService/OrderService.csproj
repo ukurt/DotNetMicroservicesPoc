@@ -25,6 +25,8 @@
     <PackageReference Include="RestEase" Version="1.5.2" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
     <PackageReference Include="Serilog.Sinks.ColoredConsole" Version="3.0.1" />
+    <PackageReference Include="Steeltoe.Discovery.ClientBase" Version="3.1.0" />
+    <PackageReference Include="Steeltoe.Discovery.Eureka" Version="3.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.1.4" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.1.4" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.1.4" />

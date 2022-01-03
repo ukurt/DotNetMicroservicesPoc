@@ -7,12 +7,14 @@ using Polly.Retry;
 using ProductService.Api.Queries;
 using ProductService.Api.Queries.Dtos;
 using RestEase;
+using Steeltoe.Common.Discovery;
+using Steeltoe.Discovery;
 
 namespace OrderService.RestClients
 {
     public interface IProductClient
     {
-        Task<ProductDto> GetProduct([Body] FindProductByIdQuery cmd);
+        Task<ProductDto> FindProductById([Query] FindProductByIdQuery cmd);
     }
 
     public class ProductClient : IProductClient
@@ -32,9 +34,10 @@ namespace OrderService.RestClients
             client = RestClient.For<IProductClient>(httpClient);
         }
 
-        public Task<ProductDto> GetProduct([Body] FindProductByIdQuery cmd)
+
+        public Task<ProductDto> FindProductById([Query] FindProductByIdQuery cmd)
         {
-            return retryPolicy.ExecuteAsync(async () => await client.GetProduct(cmd));
+            return retryPolicy.ExecuteAsync(async () => await client.FindProductById(cmd));
         }
     }
 }

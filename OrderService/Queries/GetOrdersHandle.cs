@@ -43,9 +43,9 @@ namespace OrderService.Commands
 
                     order.Customer = new CustomerDto
                     {
-                        CustomerId = customer.Customer.CustomerId,
-                        Name = customer.Customer.Name,
-                        Surname = customer.Customer.Surname
+                        CustomerId = customer.CustomerId,
+                        Name = customer.Name,
+                        Surname = customer.Surname
                     };
 
                     foreach (var orderDetail in item.OrderDetails)

@@ -19,7 +19,7 @@ namespace ProductService.Controllers
 
         // GET api/products/{code}
         [HttpGet]
-        public async Task<ActionResult> GetByCode([FromQuery] FindProductByIdQuery cmd)
+        public async Task<ActionResult> FindProductById([FromQuery] FindProductByIdQuery cmd)
         {
             var result = await mediator.Send(cmd);                        
             return new JsonResult(result);

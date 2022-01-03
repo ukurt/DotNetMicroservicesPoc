@@ -1,4 +1,5 @@
 ﻿using CustomerService.Api.Queries;
+using CustomerService.Api.Queries.Dtos;
 using OrderService.Domain;
 using System.Threading.Tasks;
 
@@ -13,14 +14,14 @@ namespace OrderService.RestClients
             this._customerClient = customerClient;
         }
 
-        public async Task<FindCustomerResult> GetCustomer(CustomerParams cmd)
+        public async Task<CustomerDto> GetCustomer(CustomerParams cmd)
         {
             var query = new FindCustomerQuery
             {
                 CustomerId = cmd.CustomerId
             };
 
-            return await _customerClient.GetCustomer(query);
+            return await _customerClient.GetByCode(query);
         }
     }
 }
