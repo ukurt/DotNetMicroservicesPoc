@@ -7,8 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Polly;
 using Polly.Retry;
 using RestEase;
-using Steeltoe.Common.Discovery;
-using Steeltoe.Discovery;
 
 namespace OrderService.RestClients
 {

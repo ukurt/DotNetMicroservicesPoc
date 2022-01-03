@@ -9,7 +9,6 @@ using Microsoft.OpenApi.Models;
 using OrderService.DataAccess.EF;
 using OrderService.Init;
 using OrderService.RestClients;
-using Steeltoe.Discovery.Client;
 using System.Linq;
 
 namespace OrderService
@@ -26,7 +25,6 @@ namespace OrderService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDiscoveryClient(Configuration);
             services.AddEFConfiguration(Configuration);
             services.AddMvc()
                 .AddNewtonsoftJson()

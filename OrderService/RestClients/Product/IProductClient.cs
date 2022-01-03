@@ -7,8 +7,6 @@ using Polly.Retry;
 using ProductService.Api.Queries;
 using ProductService.Api.Queries.Dtos;
 using RestEase;
-using Steeltoe.Common.Discovery;
-using Steeltoe.Discovery;
 
 namespace OrderService.RestClients
 {
