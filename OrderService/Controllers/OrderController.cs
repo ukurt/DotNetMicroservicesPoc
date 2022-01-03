@@ -31,5 +31,12 @@ namespace OrderService.Controllers
             var result = await bus.Send(cmd);
             return new JsonResult(result);
         }
+
+        [HttpGet]
+        [Route("ping")]
+        public async Task<ActionResult> Ping()
+        {
+            return new JsonResult(true);
+        }
     }
 }
