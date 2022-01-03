@@ -34,5 +34,5 @@ Scripts have been divided into two parts:
 
 You can use scripts to build/run/stop/down all containers.
 
-When you open http://localhost:5050/swagger/index.html to get orders, you can enter 01.01.2021 to startDate, 31.12.2022 to end date and you can get aggregate result from customer and product apis.
+When you open http://localhost:5050/swagger/index.html to get orders, you can enter 01.01.2021 to startDate, 12.31.2022 to end date and you can get aggregate result from customer and product apis.
 
