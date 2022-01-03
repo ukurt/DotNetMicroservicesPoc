@@ -25,57 +25,67 @@ namespace OrderService.Commands
 
         public async Task<GetOrderDetailsQueryResult> Handle(GetOrderDetailsQuery request, CancellationToken cancellationToken)
         {
-            var result = await _repo.GetAll(request.StartDate, request.EndDate);
-
             var orderResult = new GetOrderDetailsQueryResult();
 
-            if (result != null && result.Any())
+            try
             {
-                foreach (var item in result)
+                var result = await _repo.GetAll(request.StartDate, request.EndDate);
+
+
+                if (result != null && result.Any())
                 {
-                    var customer = await _customerService.GetCustomer(item.UserId);
-                    var order = new OrderDto
+                    foreach (var item in result)
                     {
-                        CreatedDate = item.CreatedDate,
-                        OrderId = item.Id,
-                        TotalPrice = item.TotalPrice
-                    };
-
-                    order.Customer = new CustomerDto
-                    {
-                        CustomerId = customer.CustomerId,
-                        Name = customer.Name,
-                        Surname = customer.Surname
-                    };
-
-                    foreach (var orderDetail in item.OrderDetails)
-                    {
-                        var product = await _productService.GetProduct(orderDetail.ProductId);
-                        
-                        var orderDto = new OrderDetailDto
+                        var customer = await _customerService.GetCustomer(item.UserId);
+                        var order = new OrderDto
                         {
-                            CreatedDate = orderDetail.CreatedDate,
-                            OrderDetailId = orderDetail.Id,
-                            Quantity = orderDetail.Quantity,
-                            TotalPrice = orderDetail.TotalPrice,
-                            UnitPrice = orderDetail.UnitPrice
+                            CreatedDate = item.CreatedDate,
+                            OrderId = item.Id,
+                            TotalPrice = item.TotalPrice
                         };
 
-                        orderDto.Product = new ProductDto
+                        order.Customer = new CustomerDto
                         {
-                            CustomerId = product.CustomerId,
-                            ProductId = product.ProductId,
-                            SKUCode = product.SKUCode,
-                            Title = product.Title
+                            CustomerId = customer.CustomerId,
+                            Name = customer.Name,
+                            Surname = customer.Surname
                         };
 
-                        order.OrderDetails.Add(orderDto);
+                        foreach (var orderDetail in item.OrderDetails)
+                        {
+                            var product = await _productService.GetProduct(orderDetail.ProductId);
+
+                            var orderDto = new OrderDetailDto
+                            {
+                                CreatedDate = orderDetail.CreatedDate,
+                                OrderDetailId = orderDetail.Id,
+                                Quantity = orderDetail.Quantity,
+                                TotalPrice = orderDetail.TotalPrice,
+                                UnitPrice = orderDetail.UnitPrice
+                            };
+
+                            orderDto.Product = new ProductDto
+                            {
+                                CustomerId = product.CustomerId,
+                                ProductId = product.ProductId,
+                                SKUCode = product.SKUCode,
+                                Title = product.Title
+                            };
+
+                            order.OrderDetails.Add(orderDto);
+                        }
+
+                        orderResult.Orders.Add(order);
                     }
 
-                    orderResult.Orders.Add(order);
                 }
-
             }
+            catch (System.Exception ex)
+            {
+
+                throw ex;
+            }
+            
 
             return orderResult;
 

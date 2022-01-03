@@ -10,6 +10,8 @@ services:
      container_name: dotnet-customer-service
      ports:
       - 5090:5090
+     networks:
+     - my-network
 
     dotnet-order-service:
      build: 
@@ -19,6 +21,8 @@ services:
      container_name: dotnet-order-service
      ports:
       - 5050:5050
+     networks:
+     - my-network
     
     dotnet-product-service:
      build: 
@@ -28,3 +32,9 @@ services:
      container_name: dotnet-product-service
      ports:
       - 5030:5030
+     networks:
+     - my-network
+
+networks:
+  my-network:
+    external: true
