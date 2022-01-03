@@ -2,29 +2,29 @@ version: '3'
 
 services:
 
-  # dotnet-customer-service:
-    # build: 
-      # context: ../
-      # dockerfile: CustomerService/Dockerfile
-    # image: dotnet-customer-service
-    # container_name: dotnet-customer-service
-    # ports:
-    # - 5090:5090
+    dotnet-customer-service:
+     build: 
+      context: ../
+      dockerfile: CustomerService/Dockerfile
+     image: dotnet-customer-service
+     container_name: dotnet-customer-service
+     ports:
+      - 5090:5090
 
-    # dotnet-order-service:
-       # build: 
-         # context: ../
-         # dockerfile: OrderService/Dockerfile
-       # image: dotnet-order-service
-       # container_name: dotnet-order-service
-       # ports:
-       # - 5050:5050
+    dotnet-order-service:
+     build: 
+      context: ../
+      dockerfile: OrderService/Dockerfile
+     image: dotnet-order-service
+     container_name: dotnet-order-service
+     ports:
+      - 5050:5050
     
     dotnet-product-service:
-       build: 
-         context: ../
-         dockerfile: ProductService/Dockerfile
-       image: dotnet-product-service
-       container_name: dotnet-product-service
-       ports:
-       - 5030:5030
+     build: 
+      context: ../
+      dockerfile: ProductService/Dockerfile
+     image: dotnet-product-service
+     container_name: dotnet-product-service
+     ports:
+      - 5030:5030
